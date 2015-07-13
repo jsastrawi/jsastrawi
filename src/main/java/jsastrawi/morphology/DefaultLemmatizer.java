@@ -1,12 +1,16 @@
 package jsastrawi.morphology;
 
 import java.util.Set;
+import jsastrawi.morphology.defaultimpl.Context;
+import jsastrawi.morphology.defaultimpl.visitor.VisitorProvider;
 
 public class DefaultLemmatizer implements Lemmatizer {
     private final Set<String> dictionary;
+    private final VisitorProvider visitorProvider;
 
     public DefaultLemmatizer(Set<String> dictionary) {
         this.dictionary = dictionary;
+        this.visitorProvider = new VisitorProvider();
     }
     
     @Override
@@ -19,7 +23,10 @@ public class DefaultLemmatizer implements Lemmatizer {
             return word;
         }
         
-        return "";
+        Context context = new Context(word, dictionary, visitorProvider);
+        context.execute();
+        
+        return context.getResult();
     }
     
 }

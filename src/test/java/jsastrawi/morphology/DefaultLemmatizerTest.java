@@ -1,5 +1,6 @@
 package jsastrawi.morphology;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import junit.framework.TestCase;
@@ -14,9 +15,9 @@ public class DefaultLemmatizerTest extends TestCase {
     @Before
     @Override
     public void setUp() {
-        dictionary = new LinkedHashSet();
-        dictionary.add("nilai");
+        String rootWords[] = {"nilai", "hancur", "benar", "apa", "siapa"};
         
+        dictionary = new LinkedHashSet<>(Arrays.asList(rootWords));
         lemmatizer = new DefaultLemmatizer(dictionary);
     }
     
@@ -24,7 +25,7 @@ public class DefaultLemmatizerTest extends TestCase {
         assertThat(lemmatizer, instanceOf(Lemmatizer.class));
     }
     
-    private void assertLemma(String lemma, String word) {
+    private void assertLemma(String word, String lemma) {
         assertEquals(lemma, lemmatizer.lemmatize(word));
     }
     
@@ -35,5 +36,12 @@ public class DefaultLemmatizerTest extends TestCase {
     public void testDontStemShortWords() {
         assertLemma("mei", "mei");
         assertLemma("bui", "bui");
+    }
+    
+    public void testLahKahTahPun() {
+        assertLemma("hancurlah", "hancur");
+        assertLemma("benarkah", "benar");
+        assertLemma("apatah", "apa");
+        assertLemma("siapapun", "siapa");
     }
 }
