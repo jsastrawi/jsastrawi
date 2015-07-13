@@ -15,7 +15,10 @@ public class DefaultLemmatizerTest extends TestCase {
     @Before
     @Override
     public void setUp() {
-        String rootWords[] = {"nilai", "hancur", "benar", "apa", "siapa"};
+        String rootWords[] = {"nilai", "hancur", "benar", "apa", "siapa", "jubah", 
+            "baju", "celana", "hantu", "beli", "jual", "buku", "milik", "kulit",
+            "beri", "sakit", "kasih"
+        };
         
         dictionary = new LinkedHashSet<>(Arrays.asList(rootWords));
         lemmatizer = new DefaultLemmatizer(dictionary);
@@ -43,5 +46,27 @@ public class DefaultLemmatizerTest extends TestCase {
         assertLemma("benarkah", "benar");
         assertLemma("apatah", "apa");
         assertLemma("siapapun", "siapa");
+    }
+    
+    public void testKuMuNya() {
+        assertLemma("jubahku", "jubah");
+        assertLemma("bajumu", "baju");
+        assertLemma("celananya", "celana");
+    }
+    
+    public void testIKanAn() {
+        assertLemma("hantui", "hantu");
+        assertLemma("belikan", "beli");
+        assertLemma("jualan", "jual");
+    }
+    
+    public void testSuffixCombination() {
+        assertLemma("bukumukah", "buku");
+        assertLemma("miliknyalah", "milik");
+        assertLemma("kulitkupun", "kulit");
+        assertLemma("berikanku", "beri");
+        assertLemma("sakitimu", "sakit");
+        assertLemma("beriannya", "beri");
+        assertLemma("kasihilah", "kasih");
     }
 }

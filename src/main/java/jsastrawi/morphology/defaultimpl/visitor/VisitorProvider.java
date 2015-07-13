@@ -14,6 +14,8 @@ public class VisitorProvider {
         
         suffixVisitors = new LinkedList<>();
         suffixVisitors.add(new RemoveInflectionalParticle()); // lah|kah|tah|pun
+        suffixVisitors.add(new RemoveInflectionalPossessivePronoun()); // ku|mu|nya
+        suffixVisitors.add(new RemoveDerivationalSuffix()); // i|kan|an
     }
     
     public List<ContextVisitor> getSuffixVisitors() {
