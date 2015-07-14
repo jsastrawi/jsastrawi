@@ -1,8 +1,9 @@
 package jsastrawi.morphology.defaultimpl.visitor;
 
-import jsastrawi.morphology.defaultimpl.visitor.prefixrules.PrefixRule1a;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import jsastrawi.morphology.defaultimpl.visitor.prefixrules.*;
 
 public class VisitorProvider {
     private final List<ContextVisitor> visitors;
@@ -19,7 +20,24 @@ public class VisitorProvider {
         suffixVisitors.add(new RemoveDerivationalSuffix()); // i|kan|an
         
         prefixVisitors.add(new RemovePlainPrefix()); // di|ke|se
-        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule1a()));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule1a(),
+                new PrefixRule1b(),
+        })));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule2()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule3()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule4()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule5()));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule6a(),
+                new PrefixRule6b()
+        })));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule7()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule8()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule9()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule10()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule11()));
+        //prefixVisitors.add(new PrefixDisambiguator(new PrefixRule12()));
         
     }
     
