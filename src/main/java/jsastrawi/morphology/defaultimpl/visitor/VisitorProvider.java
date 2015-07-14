@@ -1,5 +1,6 @@
 package jsastrawi.morphology.defaultimpl.visitor;
 
+import jsastrawi.morphology.defaultimpl.visitor.prefixrules.PrefixRule1a;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +17,10 @@ public class VisitorProvider {
         suffixVisitors.add(new RemoveInflectionalParticle()); // lah|kah|tah|pun
         suffixVisitors.add(new RemoveInflectionalPossessivePronoun()); // ku|mu|nya
         suffixVisitors.add(new RemoveDerivationalSuffix()); // i|kan|an
+        
+        prefixVisitors.add(new RemovePlainPrefix()); // di|ke|se
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule1a()));
+        
     }
     
     public List<ContextVisitor> getSuffixVisitors() {

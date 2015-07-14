@@ -17,7 +17,7 @@ public class DefaultLemmatizerTest extends TestCase {
     public void setUp() {
         String rootWords[] = {"nilai", "hancur", "benar", "apa", "siapa", "jubah", 
             "baju", "celana", "hantu", "beli", "jual", "buku", "milik", "kulit",
-            "beri", "sakit", "kasih"
+            "beri", "sakit", "kasih", "buang", "sakit", "suap", "adu"
         };
         
         dictionary = new LinkedHashSet<>(Arrays.asList(rootWords));
@@ -68,5 +68,16 @@ public class DefaultLemmatizerTest extends TestCase {
         assertLemma("sakitimu", "sakit");
         assertLemma("beriannya", "beri");
         assertLemma("kasihilah", "kasih");
+    }
+    
+    public void testPlainPrefix() {
+        assertLemma("dibuang", "buang");
+        assertLemma("kesakitan", "sakit");
+        assertLemma("sesuap", "suap");
+    }
+    
+    public void testPrefixDisambiguation() {
+        // rule 1a : berV -> ber-V
+        assertLemma("beradu", "adu");
     }
 }

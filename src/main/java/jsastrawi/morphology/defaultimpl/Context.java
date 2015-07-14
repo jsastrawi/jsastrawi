@@ -84,6 +84,12 @@ public class Context {
         if (dictionary.contains(currentWord)) {
             return;
         }
+        
+        // step 4, 5
+        removePrefixes();
+        if (dictionary.contains(currentWord)) {
+            return;
+        }
     }
 
     private String acceptVisitors(List<ContextVisitor> visitors) {
@@ -108,5 +114,38 @@ public class Context {
 
     private void removeSuffixes() {
         acceptVisitors(suffixVisitors);
+    }
+
+    private void removePrefixes() {
+        for (int i = 0; i < 3; i++) {
+            acceptPrefixVisitors(prefixVisitors);
+            if (dictionary.contains(currentWord)) {
+                return;
+            }
+        }
+    }
+
+    private void acceptPrefixVisitors(List<ContextVisitor> prefixVisitors) {
+        int removalCount = removals.size();
+        
+        for (ContextVisitor visitor : prefixVisitors) {
+            accept(visitor);
+            
+            if (dictionary.contains(currentWord)) {
+                return;
+            }
+            
+            if (processIsStopped) {
+                return;
+            }
+            
+            if (removals.size() > removalCount) {
+                return;
+            }
+        }
+    }
+
+    public Set<String> getDictionary() {
+        return dictionary;
     }
 }
