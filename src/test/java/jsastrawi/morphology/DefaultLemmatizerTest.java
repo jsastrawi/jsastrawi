@@ -20,7 +20,10 @@ public class DefaultLemmatizerTest extends TestCase {
             "beri", "sakit", "kasih", "buang", "sakit", "suap", "adu", "rambut",
             "suara", "daerah", "ajar", "kerja", "ternak", "asing", "raup", "gerak",
             "puruk", "terbang", "lipat", "ringkas", "warna", "yakin", "bangun",
-            "fitnah", "vonis", "baru", "ajar"
+            "fitnah", "vonis", "baru", "ajar", "minum", "pukul", "cinta", "dua",
+            "jauh", "ziarah", "nuklir", "tangkap", "gila", "hajar", "qasar",
+            "udara", "kupas", "suara", "populer", "warna", "yoga", "adil", "rumah",
+            "muka"
         };
         
         dictionary = new LinkedHashSet<>(Arrays.asList(rootWords));
@@ -128,5 +131,92 @@ public class DefaultLemmatizerTest extends TestCase {
         // rule 12 : mempe{r|l} -> mem-pe
         //assertLemma("memperbaru", "baru");
         //assertLemma("mempelajar", "ajar");
+        
+        // rule 13a : mem{rV|V} -> mem{rV|V}
+        assertLemma("meminum", "minum");
+        
+        // rule 13b : mem{rV|V} -> me-p{rV|V}
+        assertLemma("memukul", "pukul");
+        
+        // rule 14 : men{c|d|j|z} -> men-{c|d|j|z}
+        assertLemma("mencinta", "cinta");
+        assertLemma("mendua", "dua");
+        assertLemma("menjauh", "jauh");
+        assertLemma("menziarah", "ziarah");
+        
+        // rule 15a : men{V} -> me-n{V}
+        assertLemma("menuklir", "nuklir");
+        
+        // rule 15b : men{V} -> me-t{V}
+        assertLemma("menangkap", "tangkap");
+        
+        // rule 16 : meng{g|h|q} -> meng-{g|h|q}
+        assertLemma("menggila", "gila");
+        assertLemma("menghajar", "hajar");
+        assertLemma("mengqasar", "qasar");
+        
+        // rule 17a : mengV -> meng-V
+        assertLemma("mengudara", "udara");
+        
+        // rule 17b : mengV -> meng-kV
+        assertLemma("mengupas", "kupas");
+        
+        // rule 18 : menyV -> meny-sV
+        assertLemma("menyuarakan", "suara");
+        
+        // rule 19 : mempV -> mem-pV where V != 'e'
+        assertLemma("mempopulerkan", "populer");
+        
+        // rule 20 : pe{w|y}V -> pe-{w|y}V
+        assertLemma("pewarna", "warna");
+        assertLemma("peyoga", "yoga");
+        
+        // rule 21a : perV -> per-V
+        assertLemma("peradilan", "adil");
+        
+        // rule 21b : perV -> pe-rV
+        assertLemma("perumahan", "rumah");
+        
+        // rule 23 : perCAP -> per-CAP where C != 'r' and P != 'er'
+        assertLemma("permuka", "muka");
+        
+        // rule 24 : perCAerV -> per-CAerV where C != 'r'
+        assertLemma("perdaerah", "daerah");
+        
+        // rule 25 : pem{b|f|v} -> pem-{b|f|v}
+        assertLemma("pembangun", "bangun");
+        assertLemma("pemfitnah", "fitnah");
+        assertLemma("pemvonis", "vonis");
+        
+        // rule 26a : pem{rV|V} -> pe-m{rV|V}
+        assertLemma("peminum", "minum");
+        
+        // rule 26b : pem{rV|V} -> pe-p{rV|V}
+        assertLemma("pemukul", "pukul");
+        
+        // rule 27 : men{c|d|j|z} -> men-{c|d|j|z}
+        // TODO : should find more relevant examples
+        assertLemma("pencinta", "cinta");
+        assertLemma("pendua", "dua");
+        assertLemma("penjauh", "jauh");
+        assertLemma("penziarah", "ziarah");
+        
+        // rule 28a : pen{V} -> pe-n{V}
+        assertLemma("penuklir", "nuklir");
+
+        // rule 28b : pen{V} -> pe-t{V}
+        assertLemma("penangkap", "tangkap");
+        
+        // rule 29 : peng{g|h|q} -> peng-{g|h|q}
+        assertLemma("penggila", "gila");
+        assertLemma("penghajar", "hajar");
+        assertLemma("pengqasar", "qasar");
+        
+        // rule 30a : pengV -> peng-V
+        assertLemma("pengudara", "udara");
+
+        // rule 30b : pengV -> peng-kV
+        assertLemma("pengupas", "kupas");
+        
     }
 }

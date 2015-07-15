@@ -38,7 +38,49 @@ public class VisitorProvider {
         prefixVisitors.add(new PrefixDisambiguator(new PrefixRule10()));
         prefixVisitors.add(new PrefixDisambiguator(new PrefixRule11()));
         //prefixVisitors.add(new PrefixDisambiguator(new PrefixRule12()));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule13a(),
+                new PrefixRule13b()
+        })));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule14()));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule15a(),
+                new PrefixRule15b()
+        })));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule16()));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule17a(),
+                new PrefixRule17b()
+        })));
         
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule18b()
+        })));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule19()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule20()));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule21a(),
+                new PrefixRule21b()
+        })));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule23()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule24()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule25()));
+        
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule26a(),
+                new PrefixRule26b()
+        })));
+        
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule27()));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule28a(),
+                new PrefixRule28b()
+        })));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule29()));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule30a(),
+                new PrefixRule30b()
+        })));
     }
     
     public List<ContextVisitor> getSuffixVisitors() {
