@@ -27,7 +27,8 @@ public class DefaultLemmatizerTest extends TestCase {
             "sekolah", "tahan", "capai", "mulai", "tani", "abai",
             "syarat", "syukur", "bom", "promosi", "proteksi", "prediksi", "kaji",
             "sembunyi", "langgan", "laku", "baik", "bisik", "terang", "iman", "puas",
-            "makan"
+            "makan", "nyala", "nyanyi", "nyata", "nyawa", "rata", "lembut", "ligas",
+            "kerja"
         };
         
         dictionary = new LinkedHashSet<>(Arrays.asList(rootWords));
@@ -284,5 +285,18 @@ public class DefaultLemmatizerTest extends TestCase {
         assertLemma("berpelanggan", "langgan");
         assertLemma("bermakanan", "makan");
 
+        // CC (Modified ECS)
+        assertLemma("menyala", "nyala");
+        assertLemma("menyanyikan", "nyanyi");
+        assertLemma("menyatakannya", "nyata");
+        
+        assertLemma("penyanyi", "nyanyi");
+        assertLemma("penyawaan", "nyawa");
+        
+        // CC infix
+        assertLemma("rerata", "rata");
+        assertLemma("lelembut", "lembut");
+        assertLemma("lemigas", "ligas");
+        assertLemma("kinerja", "kerja");
     }
 }

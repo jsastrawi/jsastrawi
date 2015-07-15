@@ -54,6 +54,7 @@ public class VisitorProvider {
         })));
         
         prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule18a(),    
                 new PrefixRule18b()
         })));
         prefixVisitors.add(new PrefixDisambiguator(new PrefixRule19()));
@@ -82,12 +83,29 @@ public class VisitorProvider {
                 new PrefixRule30b()
         })));
         prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule31a(),
                 new PrefixRule31b()
         })));
         prefixVisitors.add(new PrefixDisambiguator(new PrefixRule32()));
         prefixVisitors.add(new PrefixDisambiguator(new PrefixRule34()));
         prefixVisitors.add(new PrefixDisambiguator(new PrefixRule35()));
         prefixVisitors.add(new PrefixDisambiguator(new PrefixRule36()));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule37a(),
+                new PrefixRule37b()
+        })));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule38a(),
+                new PrefixRule38b()
+        })));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule39a(),
+                new PrefixRule39b()
+        })));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule40a(),
+                new PrefixRule40b()
+        })));
     }
     
     public List<ContextVisitor> getSuffixVisitors() {
