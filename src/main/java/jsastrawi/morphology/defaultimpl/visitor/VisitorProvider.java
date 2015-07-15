@@ -81,6 +81,13 @@ public class VisitorProvider {
                 new PrefixRule30a(),
                 new PrefixRule30b()
         })));
+        prefixVisitors.add(new PrefixDisambiguator(Arrays.asList(new Disambiguator[]{
+                new PrefixRule31b()
+        })));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule32()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule34()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule35()));
+        prefixVisitors.add(new PrefixDisambiguator(new PrefixRule36()));
     }
     
     public List<ContextVisitor> getSuffixVisitors() {

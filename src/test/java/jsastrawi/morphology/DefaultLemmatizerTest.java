@@ -20,10 +20,10 @@ public class DefaultLemmatizerTest extends TestCase {
             "beri", "sakit", "kasih", "buang", "sakit", "suap", "adu", "rambut",
             "suara", "daerah", "ajar", "kerja", "ternak", "asing", "raup", "gerak",
             "puruk", "terbang", "lipat", "ringkas", "warna", "yakin", "bangun",
-            "fitnah", "vonis", "baru", "ajar", "minum", "pukul", "cinta", "dua",
+            "fitnah", "vonis", "baru", "labuh", "minum", "pukul", "cinta", "dua",
             "jauh", "ziarah", "nuklir", "tangkap", "gila", "hajar", "qasar",
             "udara", "kupas", "suara", "populer", "warna", "yoga", "adil", "rumah",
-            "muka"
+            "muka", "tarung", "percaya", "serta", "pengaruh", "kritik"
         };
         
         dictionary = new LinkedHashSet<>(Arrays.asList(rootWords));
@@ -217,6 +217,33 @@ public class DefaultLemmatizerTest extends TestCase {
 
         // rule 30b : pengV -> peng-kV
         assertLemma("pengupas", "kupas");
+        
+        // rule 31 : penyV -> peny-sV
+        assertLemma("penyuara", "suara");
+        
+        // rule 32 : pelV -> pe-lV except pelajar -> ajar
+        assertLemma("pelajar", "ajar");
+        assertLemma("pelabuh", "labuh");
+        
+        // rule 33 : peCerV -> per-erV where C != {r|w|y|l|m|n}
+        // TODO : find the examples
+        
+        // rule 34 : peCP -> pe-CP where C != {r|w|y|l|m|n} and P != 'er'
+        assertLemma("petarung", "tarung");
+        
+        // rule 35 : terC1erC2 -> ter-C1erC2 where C1 != 'r'
+        assertLemma("terpercaya", "percaya");
+        
+        // rule 36 : peC1erC2 -> pe-C1erC2 where C1 != {r|w|y|l|m|n}
+        assertLemma("pekerja", "kerja");
+        assertLemma("peserta", "serta");
+        
+        // CS modify rule 12
+        //assertLemma("mempengaruhi", "pengaruh");
+        
+        // CS modify rule 16
+        assertLemma("pengkritik", "kritik");
+        
         
     }
 }
