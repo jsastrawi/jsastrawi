@@ -1,5 +1,6 @@
 package jsastrawi.morphology.defaultimpl;
 
+import jsastrawi.morphology.defaultimpl.confixstripping.PrecedenceAdjustmentSpec;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -77,6 +78,31 @@ public class Context {
         
         if (dictionary.contains(currentWord)) {
             return;
+        }
+        
+        PrecedenceAdjustmentSpec spec = new PrecedenceAdjustmentSpec();
+        
+        /*
+         * Confix Stripping
+         * Try to remove prefix before suffix if the specification is met
+         */
+        if (spec.isSatisfiedBy(originalWord)) {
+            // step 4, 5
+            removePrefixes();
+            if (dictionary.contains(currentWord)) {
+                return;
+            }
+            
+            // step 2, 3
+            removeSuffixes();
+            if (dictionary.contains(currentWord)) {
+                return;
+            } else {
+                // if the trial is failed, restore the original word
+                // and continue to normal rule precedence (suffix first, prefix afterwards)
+                setCurrentWord(originalWord);
+                removals.clear();
+            }
         }
         
         // step 2, 3

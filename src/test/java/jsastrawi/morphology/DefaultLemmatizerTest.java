@@ -23,7 +23,8 @@ public class DefaultLemmatizerTest extends TestCase {
             "fitnah", "vonis", "baru", "labuh", "minum", "pukul", "cinta", "dua",
             "jauh", "ziarah", "nuklir", "tangkap", "gila", "hajar", "qasar",
             "udara", "kupas", "suara", "populer", "warna", "yoga", "adil", "rumah",
-            "muka", "tarung", "percaya", "serta", "pengaruh", "kritik"
+            "muka", "tarung", "percaya", "serta", "pengaruh", "kritik",
+            "sekolah", "tahan", "capai", "mulai", "tani", "abai"
         };
         
         dictionary = new LinkedHashSet<>(Arrays.asList(rootWords));
@@ -244,6 +245,12 @@ public class DefaultLemmatizerTest extends TestCase {
         // CS modify rule 16
         assertLemma("pengkritik", "kritik");
         
-        
+        // CS adjusting rule precedence
+        assertLemma("bersekolah", "sekolah");
+        assertLemma("bertahan", "tahan");
+        assertLemma("mencapai", "capai");
+        assertLemma("dimulai", "mulai");
+        assertLemma("petani", "tani");
+        assertLemma("terabai", "abai");
     }
 }
