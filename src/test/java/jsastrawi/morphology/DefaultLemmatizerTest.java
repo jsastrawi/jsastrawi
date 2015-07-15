@@ -24,7 +24,10 @@ public class DefaultLemmatizerTest extends TestCase {
             "jauh", "ziarah", "nuklir", "tangkap", "gila", "hajar", "qasar",
             "udara", "kupas", "suara", "populer", "warna", "yoga", "adil", "rumah",
             "muka", "tarung", "percaya", "serta", "pengaruh", "kritik",
-            "sekolah", "tahan", "capai", "mulai", "tani", "abai"
+            "sekolah", "tahan", "capai", "mulai", "tani", "abai",
+            "syarat", "syukur", "bom", "promosi", "proteksi", "prediksi", "kaji",
+            "sembunyi", "langgan", "laku", "baik", "bisik", "terang", "iman", "puas",
+            "makan"
         };
         
         dictionary = new LinkedHashSet<>(Arrays.asList(rootWords));
@@ -252,5 +255,34 @@ public class DefaultLemmatizerTest extends TestCase {
         assertLemma("dimulai", "mulai");
         assertLemma("petani", "tani");
         assertLemma("terabai", "abai");
+        
+        // ECS
+        assertLemma("mensyaratkan", "syarat");
+        assertLemma("mensyukuri", "syukur");
+        assertLemma("mengebom", "bom");
+        assertLemma("mempromosikan", "promosi");
+        assertLemma("memproteksi", "proteksi");
+        assertLemma("memprediksi", "prediksi");
+        assertLemma("pengkajian", "kaji");
+        assertLemma("pengebom", "bom");
+        
+        // ECS loop pengembalian akhiran
+        assertLemma("bersembunyi", "sembunyi");
+        assertLemma("bersembunyilah", "sembunyi");
+        assertLemma("pelanggan", "langgan");
+        assertLemma("pelaku", "laku");
+        assertLemma("pelangganmukah", "langgan");
+        assertLemma("pelakunyalah", "laku");
+        
+        assertLemma("perbaikan", "baik");
+        assertLemma("kebaikannya", "baik");
+        assertLemma("bisikan", "bisik");
+        assertLemma("menerangi", "terang");
+        assertLemma("berimanlah", "iman");
+        
+        assertLemma("memuaskan", "puas");
+        assertLemma("berpelanggan", "langgan");
+        assertLemma("bermakanan", "makan");
+
     }
 }

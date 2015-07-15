@@ -1,9 +1,12 @@
 package jsastrawi.morphology.defaultimpl;
 
-import jsastrawi.morphology.defaultimpl.confixstripping.PrecedenceAdjustmentSpec;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
+import jsastrawi.morphology.defaultimpl.confixstripping.PrecedenceAdjustmentSpec;
 import jsastrawi.morphology.defaultimpl.visitor.ContextVisitor;
 import jsastrawi.morphology.defaultimpl.visitor.VisitorProvider;
 
@@ -13,7 +16,7 @@ public class Context {
     private String currentWord;
     private final Set<String> dictionary;
     private final VisitorProvider visitorProvider;
-    private final List<Removal> removals;
+    private List<Removal> removals;
     private String result;
     private final List<ContextVisitor> visitors;
     private final List<ContextVisitor> suffixVisitors;
@@ -116,6 +119,8 @@ public class Context {
         if (dictionary.contains(currentWord)) {
             return;
         }
+        
+        loopPengembalianAkhiran();
     }
 
     private String acceptVisitors(List<ContextVisitor> visitors) {
@@ -173,5 +178,67 @@ public class Context {
 
     public Set<String> getDictionary() {
         return dictionary;
+    }
+
+    private void loopPengembalianAkhiran() {
+        // restore prefix to form [DP+[DP+[DP]]] + Root word
+        restorePrefix();
+        
+        List<Removal> originalRemovals = removals;
+        LinkedList<Removal> reversedRemovals = new LinkedList<>(removals);
+        Collections.reverse(reversedRemovals);
+        String originalCurrentWord = currentWord;
+        
+        for (Removal removal : reversedRemovals) {
+            if (!isSuffixRemoval(removal)) {
+                continue;
+            }
+            
+            if (removal.getRemovedPart().equals("kan")) {
+                setCurrentWord(removal.getResult() + "k");
+                
+                // step 4, 5
+                removePrefixes();
+                if (dictionary.contains(currentWord)) {
+                    return;
+                }
+                
+                setCurrentWord(removal.getResult() + "kan");
+            } else {
+                setCurrentWord(removal.getSubject());
+            }
+            
+            // step 4, 5
+            removePrefixes();
+            if (dictionary.contains(currentWord)) {
+                return;
+            }
+            
+            this.removals = originalRemovals;
+            setCurrentWord(originalCurrentWord);
+        }
+    }
+
+    private void restorePrefix() {
+        for (Removal removal : removals) {
+            if (removal.getAffixType().equals("DP")) {
+                setCurrentWord(removal.getSubject());
+                break;
+            }
+        }
+        
+        
+        ListIterator<Removal> iter = removals.listIterator();
+        while (iter.hasNext()) {
+            if (iter.next().getAffixType().equals("DP")) {
+                iter.remove();
+            }
+        }
+    }
+
+    private boolean isSuffixRemoval(Removal removal) {
+        return removal.getAffixType().equals("DS")
+                || removal.getAffixType().equals("PP")
+                || removal.getAffixType().equals("P");
     }
 }
