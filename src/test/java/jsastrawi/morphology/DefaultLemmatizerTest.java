@@ -28,7 +28,9 @@ public class DefaultLemmatizerTest extends TestCase {
             "syarat", "syukur", "bom", "promosi", "proteksi", "prediksi", "kaji",
             "sembunyi", "langgan", "laku", "baik", "bisik", "terang", "iman", "puas",
             "makan", "nyala", "nyanyi", "nyata", "nyawa", "rata", "lembut", "ligas",
-            "kerja"
+            "kerja", "balas", "tebar", "daya", "makmur", "untung", "sepuluh", "ekonomi",
+            "peran", "medan", "ideal", "final", "taat", "lewat", "nganga", "bagai",
+            "badan", "tiru", "sepak", "kuasa", "nikmat", "malaikat"
         };
         
         dictionary = new LinkedHashSet<>(Arrays.asList(rootWords));
@@ -134,8 +136,8 @@ public class DefaultLemmatizerTest extends TestCase {
         assertLemma("memvonis", "vonis");
         
         // rule 12 : mempe{r|l} -> mem-pe
-        //assertLemma("memperbaru", "baru");
-        //assertLemma("mempelajar", "ajar");
+        assertLemma("memperbaru", "baru");
+        assertLemma("mempelajar", "ajar");
         
         // rule 13a : mem{rV|V} -> mem{rV|V}
         assertLemma("meminum", "minum");
@@ -244,7 +246,7 @@ public class DefaultLemmatizerTest extends TestCase {
         assertLemma("peserta", "serta");
         
         // CS modify rule 12
-        //assertLemma("mempengaruhi", "pengaruh");
+        assertLemma("mempengaruhi", "pengaruh");
         
         // CS modify rule 16
         assertLemma("pengkritik", "kritik");
@@ -298,5 +300,66 @@ public class DefaultLemmatizerTest extends TestCase {
         assertLemma("lelembut", "lembut");
         assertLemma("lemigas", "ligas");
         assertLemma("kinerja", "kerja");
+        
+        // plurals
+        assertLemma("buku-buku", "buku");
+        assertLemma("berbalas-balasan", "balas");
+        assertLemma("bolak-balik", "bolak-balik");
+        
+        // combination of prefix + suffix
+        assertLemma("bertebaran", "tebar");
+        assertLemma("terasingkan", "asing");
+        assertLemma("membangunkan", "bangun");
+        assertLemma("mencintai", "cinta");
+        assertLemma("menduakan", "dua");
+        assertLemma("menjauhi", "jauh");
+        assertLemma("menggilai", "gila");
+        assertLemma("pembangunan", "bangun");
+        
+        // return the word if not found in the dictionary
+        assertLemma("marwan", "marwan");
+        assertLemma("subarkah", "subarkah");
+        
+        // recursively remove prefix
+        assertLemma("memberdayakan", "daya");
+        assertLemma("persemakmuran", "makmur");
+        assertLemma("keberuntunganmu", "untung");
+        assertLemma("kesepersepuluhnya", "sepuluh");
+        
+        // issues
+        assertLemma("Perekonomian", "ekonomi");
+        assertLemma("menahan", "tahan");
+        
+        // failed on other algorithm but we should lemmatize successfully
+        assertLemma("peranan", "peran");
+        assertLemma("memberikan", "beri");
+        assertLemma("medannya", "medan");
+        
+        assertLemma("sebagai", "bagai");
+        assertLemma("bagian", "bagian");
+        assertLemma("berbadan", "badan");
+        assertLemma("abdullah", "abdullah");
+
+        // adopted foreign suffixes
+        //assertLemma("budayawan", "budaya");
+        //assertLemma("karyawati", "karya");
+        assertLemma("idealis", "ideal");
+        assertLemma("idealisme", "ideal");
+        assertLemma("finalisasi", "final");
+        
+        // sastrawi additional rules
+        assertLemma("mentaati", "taat");
+        assertLemma("meniru-nirukan", "tiru");
+        assertLemma("menyepak-nyepak", "sepak");
+
+        assertLemma("melewati", "lewat");
+        assertLemma("menganga", "nganga");
+        
+        assertLemma("kupukul", "pukul");
+        assertLemma("kauhajar", "hajar");
+
+        assertLemma("kuasa-Mu", "kuasa");
+        assertLemma("nikmat-Ku", "nikmat");
+        assertLemma("malaikat-malaikat-Nya", "malaikat");
     }
 }

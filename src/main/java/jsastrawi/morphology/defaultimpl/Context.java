@@ -25,7 +25,7 @@ public class Context {
     
     public Context(String originalWord, Set<String> dictionary, VisitorProvider visitorProvider) {
         this.originalWord = originalWord;
-        this.currentWord  = originalWord;
+        this.currentWord  = this.originalWord;
         this.dictionary   = dictionary;
         this.visitorProvider = visitorProvider;
         this.removals = new LinkedList<>();
@@ -72,8 +72,13 @@ public class Context {
     }
 
     private void startStemmingProcess() {
+        
         // step 1
         if (dictionary.contains(currentWord)) {
+            return;
+        }
+        
+        if (currentWord.length() <= 3) {
             return;
         }
         

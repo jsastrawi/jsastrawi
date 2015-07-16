@@ -19,6 +19,6 @@ class RemoveDerivationalSuffix implements ContextVisitor {
     }
     
     public String remove(String word) {
-        return word.replaceAll("(i|kan|an)$", "");
+        return word.replaceAll("(is|isme|isasi|i|kan|an)$", "");
     }
 }

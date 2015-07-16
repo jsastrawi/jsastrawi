@@ -20,7 +20,7 @@ class RemoveInflectionalPossessivePronoun implements ContextVisitor {
     }
     
     public String remove(String word) {
-        return word.replaceAll("(ku|mu|nya)$", "");
+        return word.replaceAll("-*(ku|mu|nya)$", "");
     }
     
 }
