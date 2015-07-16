@@ -7,13 +7,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jsastrawi.cli.output.Output;
 import jsastrawi.cli.output.SystemOutput;
 import jsastrawi.morphology.DefaultLemmatizer;
+import jsastrawi.morphology.Lemmatizer;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -24,16 +27,16 @@ import org.apache.commons.cli.ParseException;
 
 public class LemmatizeCmd {
 
-    private Output output;
-    
+    private final Output output;
+
     public LemmatizeCmd(Output output) {
         this.output = output;
     }
-    
+
     public LemmatizeCmd() {
         this.output = new SystemOutput();
     }
-    
+
     public Output getOutput() {
         return output;
     }
@@ -48,19 +51,24 @@ public class LemmatizeCmd {
             if (args.length == 0 || cmd.hasOption("h")) {
                 HelpFormatter formatter = new HelpFormatter();
                 formatter.printHelp("lemmatize [args...] WORD...", options);
-            } else if (!cmd.getArgList().isEmpty()) {
+            } else {
                 Set<String> dictionary;
-                
+
                 if (cmd.hasOption('d')) {
                     dictionary = getDictionaryFromFile(cmd.getOptionValue('d'));
                 } else {
                     dictionary = getDefaultDictionary();
                 }
 
-                jsastrawi.morphology.Lemmatizer l = new DefaultLemmatizer(dictionary);
+                Lemmatizer l = new DefaultLemmatizer(dictionary);
 
-                for (String word : cmd.getArgs()) {
-                    output.println(l.lemmatize(word));
+                if (cmd.hasOption("tb")) {
+                    Map<String, String> map = scanTestBedMapFromFile(cmd.getOptionValue("tb"));
+                    runTestBed(map, l);
+                } else if (!cmd.getArgList().isEmpty()) {
+                    for (String word : cmd.getArgs()) {
+                        output.println(l.lemmatize(word));
+                    }
                 }
             }
         } catch (ParseException ex) {
@@ -82,6 +90,12 @@ public class LemmatizeCmd {
                 .hasArg()
                 .argName("WORD")
                 .build());
+        options.addOption(Option.builder("tb")
+                .longOpt("testbed")
+                .desc("Run a testbed against a csv file. The expected format is word,lemma.")
+                .hasArg()
+                .argName("FILE")
+                .build());
         options.addOption("h", "help", false, "This help.");
 
         return options;
@@ -93,7 +107,7 @@ public class LemmatizeCmd {
         FileReader fr = new FileReader(f);
         BufferedReader br = new BufferedReader(fr);
         fillSet(dictionary, br);
-        
+
         return dictionary;
     }
 
@@ -102,7 +116,7 @@ public class LemmatizeCmd {
         InputStream in = LemmatizeCmd.class.getResourceAsStream("/root-words.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         fillSet(dictionary, br);
-        
+
         return dictionary;
     }
 
@@ -111,5 +125,61 @@ public class LemmatizeCmd {
         while ((line = reader.readLine()) != null) {
             set.add(line);
         }
+    }
+
+    void runTestBed(Map<String, String> testbed, Lemmatizer lemmatizer) {
+        int successCount = 0;
+        int failedCount = 0;
+        float successRate = 0;
+        Map<String, String> failures = new HashMap<>();
+        Map<String, String> actuals = new HashMap<>();
+
+        for (Map.Entry<String, String> entry : testbed.entrySet()) {
+            String lemma = lemmatizer.lemmatize(entry.getKey());
+            if (lemma.equals(entry.getValue())) {
+                successCount++;
+            } else {
+                failedCount++;
+                failures.put(entry.getKey(), entry.getValue());
+                actuals.put(entry.getKey(), lemma);
+            }
+        }
+
+        if (testbed.size() > 0) {
+            successRate = (float) successCount * 100 / testbed.size();
+        }
+
+        output.println("Total test : " + testbed.size());
+        output.println("Success : " + successCount);
+        output.println("Failed : " + failedCount);
+        output.println("Success rate : " + successRate + "%");
+
+        if (failedCount > 0) {
+            output.println("Failures:");
+            int idx = 0;
+            for (Map.Entry<String, String> entry : failures.entrySet()) {
+
+                output.println("[" + idx + "] word: " + entry.getKey() + ", expected: " + entry.getValue() + ", actual: " + actuals.get(entry.getKey()));
+                idx++;
+            }
+        }
+    }
+
+    private Map<String, String> scanTestBedMapFromFile(String filePath) throws FileNotFoundException, IOException {
+        Map<String, String> map = new HashMap<>();
+
+        File f = new File(filePath);
+        FileReader fr = new FileReader(f);
+        BufferedReader reader = new BufferedReader(fr);
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] split = line.split(",");
+            if (split.length >= 2) {
+                map.put(split[0], split[1]);
+            }
+        }
+
+        return map;
     }
 }
