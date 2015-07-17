@@ -34,5 +34,11 @@ Cara Menggunakan
 Lisensi
 --------
 
-Lisensi JSastrawi adalah MIT License (MIT) sedangkan lisensi kamus kata dasar dari Kateglo adalah [CC-BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/). Untuk informasi lebih lengkap silakan kunjungi [Lisensi JSastrawi](https://github.com/jsastrawi/jsastrawi/blob/master/LICENSE) dan [Lisensi isi Kateglo](https://github.com/ivanlanin/kateglo#lisensi-isi).
+[Lisensi JSastrawi](https://github.com/jsastrawi/jsastrawi/blob/master/LICENSE) adalah MIT License (MIT).
+
+Produk ini mengandung software yang dibangun oleh Apache Software Foundation ([http://www.apache.org](http://www.apache.org)).
+
+Produk ini menggunakan pustaka CLI dari Apache Commons project ([http://commons.apache.org](http://commons.apache.org)).
+
+Produk ini mengandung kamus kata dasar yang berasal dari Kateglo dengan lisensi [CC-BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/), kemudian dilakukan beberapa perubahan.
 

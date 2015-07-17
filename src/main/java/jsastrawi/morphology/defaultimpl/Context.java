@@ -1,6 +1,29 @@
+/**
+ * JSastrawi is licensed under The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Andy Librian
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ */
 package jsastrawi.morphology.defaultimpl;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +34,7 @@ import jsastrawi.morphology.defaultimpl.visitor.ContextVisitor;
 import jsastrawi.morphology.defaultimpl.visitor.VisitorProvider;
 
 public class Context {
-    
+
     private final String originalWord;
     private String currentWord;
     private final Set<String> dictionary;
@@ -22,23 +45,23 @@ public class Context {
     private final List<ContextVisitor> suffixVisitors;
     private final List<ContextVisitor> prefixVisitors;
     private boolean processIsStopped;
-    
+
     public Context(String originalWord, Set<String> dictionary, VisitorProvider visitorProvider) {
         this.originalWord = originalWord;
-        this.currentWord  = this.originalWord;
-        this.dictionary   = dictionary;
+        this.currentWord = this.originalWord;
+        this.dictionary = dictionary;
         this.visitorProvider = visitorProvider;
         this.removals = new LinkedList<>();
-        
+
         this.visitors = visitorProvider.getVisitors();
         this.suffixVisitors = visitorProvider.getSuffixVisitors();
         this.prefixVisitors = visitorProvider.getPrefixVisitors();
     }
-    
+
     public String getOriginalWord() {
         return originalWord;
     }
-    
+
     public void setCurrentWord(String currentWord) {
         this.currentWord = currentWord;
     }
@@ -50,7 +73,7 @@ public class Context {
     public void addRemoval(Removal r) {
         removals.add(r);
     }
-    
+
     public List<Removal> getRemovals() {
         return removals;
     }
@@ -58,11 +81,11 @@ public class Context {
     public String getResult() {
         return result;
     }
-    
+
     public void execute() {
         // step 1 - 5
         startStemmingProcess();
-        
+
         // step 6
         if (dictionary.contains(currentWord)) {
             result = currentWord;
@@ -72,24 +95,24 @@ public class Context {
     }
 
     private void startStemmingProcess() {
-        
+
         // step 1
         if (dictionary.contains(currentWord)) {
             return;
         }
-        
+
         if (currentWord.length() <= 3) {
             return;
         }
-        
+
         acceptVisitors(visitors);
-        
+
         if (dictionary.contains(currentWord)) {
             return;
         }
-        
+
         PrecedenceAdjustmentSpec spec = new PrecedenceAdjustmentSpec();
-        
+
         /*
          * Confix Stripping
          * Try to remove prefix before suffix if the specification is met
@@ -100,7 +123,7 @@ public class Context {
             if (dictionary.contains(currentWord)) {
                 return;
             }
-            
+
             // step 2, 3
             removeSuffixes();
             if (dictionary.contains(currentWord)) {
@@ -112,35 +135,35 @@ public class Context {
                 removals.clear();
             }
         }
-        
+
         // step 2, 3
         removeSuffixes();
         if (dictionary.contains(currentWord)) {
             return;
         }
-        
+
         // step 4, 5
         removePrefixes();
         if (dictionary.contains(currentWord)) {
             return;
         }
-        
+
         loopPengembalianAkhiran();
     }
 
     private String acceptVisitors(List<ContextVisitor> visitors) {
         for (ContextVisitor visitor : visitors) {
             accept(visitor);
-            
+
             if (dictionary.contains(currentWord)) {
                 return currentWord;
             }
-            
+
             if (processIsStopped) {
                 return currentWord;
             }
         }
-        
+
         return currentWord;
     }
 
@@ -163,18 +186,18 @@ public class Context {
 
     private void acceptPrefixVisitors(List<ContextVisitor> prefixVisitors) {
         int removalCount = removals.size();
-        
+
         for (ContextVisitor visitor : prefixVisitors) {
             accept(visitor);
-            
+
             if (dictionary.contains(currentWord)) {
                 return;
             }
-            
+
             if (processIsStopped) {
                 return;
             }
-            
+
             if (removals.size() > removalCount) {
                 return;
             }
@@ -188,37 +211,37 @@ public class Context {
     private void loopPengembalianAkhiran() {
         // restore prefix to form [DP+[DP+[DP]]] + Root word
         restorePrefix();
-        
+
         List<Removal> originalRemovals = removals;
         LinkedList<Removal> reversedRemovals = new LinkedList<>(removals);
         Collections.reverse(reversedRemovals);
         String originalCurrentWord = currentWord;
-        
+
         for (Removal removal : reversedRemovals) {
             if (!isSuffixRemoval(removal)) {
                 continue;
             }
-            
+
             if (removal.getRemovedPart().equals("kan")) {
                 setCurrentWord(removal.getResult() + "k");
-                
+
                 // step 4, 5
                 removePrefixes();
                 if (dictionary.contains(currentWord)) {
                     return;
                 }
-                
+
                 setCurrentWord(removal.getResult() + "kan");
             } else {
                 setCurrentWord(removal.getSubject());
             }
-            
+
             // step 4, 5
             removePrefixes();
             if (dictionary.contains(currentWord)) {
                 return;
             }
-            
+
             this.removals = originalRemovals;
             setCurrentWord(originalCurrentWord);
         }
@@ -231,8 +254,7 @@ public class Context {
                 break;
             }
         }
-        
-        
+
         ListIterator<Removal> iter = removals.listIterator();
         while (iter.hasNext()) {
             if (iter.next().getAffixType().equals("DP")) {

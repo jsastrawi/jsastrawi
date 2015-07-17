@@ -1,6 +1,9 @@
 apply plugin: 'java'
+//apply plugin: 'checkstyle'
 
 version = '0.1-dev'
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
 
 //create a single Jar with all dependencies
 task fatJar(type: Jar) {
