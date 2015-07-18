@@ -28,6 +28,9 @@ import jsastrawi.morphology.defaultimpl.Context;
 import jsastrawi.morphology.defaultimpl.Removal;
 import jsastrawi.morphology.defaultimpl.RemovalImpl;
 
+/**
+ * Remove Plain Prefix (di|ke|se)
+ */
 class RemovePlainPrefix implements ContextVisitor {
 
     @Override
@@ -43,6 +46,12 @@ class RemovePlainPrefix implements ContextVisitor {
         }
     }
 
+    /**
+     * Remove plain prefix from a word
+     *
+     * @param word word
+     * @return word after the plain prefix has been removed
+     */
     public String remove(String word) {
         return word.replaceAll("^(di|ke|se)", "");
     }

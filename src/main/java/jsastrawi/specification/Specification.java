@@ -24,7 +24,21 @@
  */
 package jsastrawi.specification;
 
+/**
+ * The specification interface. Specification design pattern.
+ *
+ * See <a href="http://martinfowler.com/apsupp/spec.pdf">
+ * http://martinfowler.com/apsupp/spec.pdf</a>
+ *
+ * @param <T> Object type
+ */
 public interface Specification<T> {
 
+    /**
+     * Whether an object satisfies the specification.
+     *
+     * @param t The object
+     * @return Whether an object satisfies the specification.
+     */
     public boolean isSatisfiedBy(T t);
 }

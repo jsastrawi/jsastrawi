@@ -58,7 +58,7 @@ public class LemmatizeCmdTest extends TestCase {
         Output o = new BufferedOutput();
         LemmatizeCmd l = new LemmatizeCmd(o);
 
-        l.run(new String[]{"menahan"});
+        l.handle(new String[]{"menahan"});
         assertEquals("tahan\n", o.toString());
     }
 

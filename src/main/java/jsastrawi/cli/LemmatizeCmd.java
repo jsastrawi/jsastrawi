@@ -49,23 +49,43 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+/**
+ * Handler of lemmatize command
+ */
 public class LemmatizeCmd {
 
     private final Output output;
 
+    /**
+     * Constructor
+     *
+     * @param output Output object. It is used to print messages.
+     */
     public LemmatizeCmd(Output output) {
         this.output = output;
     }
 
+    /**
+     * Constructor
+     */
     public LemmatizeCmd() {
         this.output = new SystemOutput();
     }
 
+    /**
+     * @return output object.
+     */
     public Output getOutput() {
         return output;
     }
 
-    public void run(String[] args) throws IOException {
+    /**
+     * Handle lemmatize command
+     *
+     * @param args arguments
+     * @throws IOException IOException
+     */
+    public void handle(String[] args) throws IOException {
         Options options = buildOptions();
         CommandLineParser parser = new DefaultParser();
 

@@ -28,6 +28,9 @@ import jsastrawi.morphology.defaultimpl.Context;
 import jsastrawi.morphology.defaultimpl.Removal;
 import jsastrawi.morphology.defaultimpl.RemovalImpl;
 
+/**
+ * Remove Inflectional Particle (lah|kah|tah|pun)
+ */
 public class RemoveInflectionalParticle implements ContextVisitor {
 
     @Override
@@ -43,6 +46,12 @@ public class RemoveInflectionalParticle implements ContextVisitor {
         }
     }
 
+    /**
+     * Remove inflectional particle from a word
+     *
+     * @param word word
+     * @return word after the derivational prefix has been removed
+     */
     public String remove(String word) {
         return word.replaceAll("(lah|kah|tah|pun)$", "");
     }

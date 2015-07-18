@@ -24,6 +24,9 @@
  */
 package jsastrawi.cli.output;
 
+/**
+ * An implementation of Output backed by Standard output (System.out)
+ */
 public class SystemOutput implements Output {
 
     @Override

@@ -33,6 +33,9 @@ import jsastrawi.morphology.defaultimpl.confixstripping.PrecedenceAdjustmentSpec
 import jsastrawi.morphology.defaultimpl.visitor.ContextVisitor;
 import jsastrawi.morphology.defaultimpl.visitor.VisitorProvider;
 
+/**
+ * Encapsulated context in lemmatizing a word
+ */
 public class Context {
 
     private final String originalWord;
@@ -46,6 +49,13 @@ public class Context {
     private final List<ContextVisitor> prefixVisitors;
     private boolean processIsStopped;
 
+    /**
+     * Constructor
+     *
+     * @param originalWord original word
+     * @param dictionary dictionary of root words
+     * @param visitorProvider visitor provider
+     */
     public Context(String originalWord, Set<String> dictionary, VisitorProvider visitorProvider) {
         this.originalWord = originalWord;
         this.currentWord = this.originalWord;
@@ -58,30 +68,63 @@ public class Context {
         this.prefixVisitors = visitorProvider.getPrefixVisitors();
     }
 
+    /**
+     * Get original word of which to find the lemma
+     *
+     * @return original word
+     */
     public String getOriginalWord() {
         return originalWord;
     }
 
+    /**
+     * Set the current state of the word in the lemmatization process
+     *
+     * @param currentWord current word
+     */
     public void setCurrentWord(String currentWord) {
         this.currentWord = currentWord;
     }
 
+    /**
+     * Get current word in the middle of lemmatization process
+     *
+     * @return current word
+     */
     public String getCurrentWord() {
         return currentWord;
     }
 
+    /**
+     * Add removal to the collection for later use
+     *
+     * @param r removal
+     */
     public void addRemoval(Removal r) {
         removals.add(r);
     }
 
+    /**
+     * Get removals
+     *
+     * @return removals
+     */
     public List<Removal> getRemovals() {
         return removals;
     }
 
+    /**
+     * Get the lemma as a result of the lemmatization process
+     *
+     * @return result
+     */
     public String getResult() {
         return result;
     }
 
+    /**
+     * Execute lemmatization process
+     */
     public void execute() {
         // step 1 - 5
         startStemmingProcess();
@@ -204,6 +247,11 @@ public class Context {
         }
     }
 
+    /**
+     * Get dictionary
+     *
+     * @return dictionary
+     */
     public Set<String> getDictionary() {
         return dictionary;
     }

@@ -24,7 +24,16 @@
  */
 package jsastrawi.morphology.defaultimpl.visitor;
 
+/**
+ * Disambiguator
+ */
 public interface Disambiguator {
 
+    /**
+     * Disambiguate a word
+     * 
+     * @param word word
+     * @return stemmed word
+     */
     public String disambiguate(String word);
 }

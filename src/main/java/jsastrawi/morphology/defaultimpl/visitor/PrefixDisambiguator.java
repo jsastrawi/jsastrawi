@@ -26,12 +26,21 @@ package jsastrawi.morphology.defaultimpl.visitor;
 
 import java.util.Collection;
 
+/**
+ * Prefix disambiguator
+ */
 class PrefixDisambiguator extends AbstractDisambiguatePrefixRule implements ContextVisitor {
 
+    /**
+     * Constructor
+     */
     public PrefixDisambiguator(Disambiguator disambiguator) {
         this.addDisambiguator(disambiguator);
     }
 
+    /**
+     * Constructor
+     */
     public PrefixDisambiguator(Collection<Disambiguator> disambiguators) {
         this.addDisambiguators(disambiguators);
     }

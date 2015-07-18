@@ -31,21 +31,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The main class for Command Line Interface.
+ */
 public class Main {
 
+    /**
+     * The main entry point function which is called first from the CLI.
+     *
+     * @param args Command line arguments
+     * @throws IOException IOException
+     */
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
             printHelp();
         } else if (args[0].toLowerCase().equals("lemmatize")) {
             Output bufferedOutput = new BufferedOutput();
             LemmatizeCmd lemmatizeCmd = new LemmatizeCmd(bufferedOutput);
-            lemmatizeCmd.run(removeCommandFromArgs(args));
+            lemmatizeCmd.handle(removeCommandFromArgs(args));
             System.out.print(bufferedOutput.toString());
         } else {
             printHelp();
         }
     }
 
+    /**
+     * Print Command Line usage
+     */
     private static void printHelp() {
         System.out.println("JSastrawi");
         System.out.println("usage: command [arguments]\n");
@@ -53,6 +65,13 @@ public class Main {
         System.out.println("lemmatize            Determine the lemma (base form) for a given word.");
     }
 
+    /**
+     * Remove the command (which is the first argument) from an array of
+     * arguments.
+     *
+     * @param args arguments
+     * @return a new array of arguments after the command has been removed
+     */
     static String[] removeCommandFromArgs(String[] args) {
         List<String> largs = new ArrayList<>(Arrays.asList(args));
         if (largs.size() > 0) {

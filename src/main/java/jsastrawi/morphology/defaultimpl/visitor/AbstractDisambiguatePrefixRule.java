@@ -30,6 +30,9 @@ import jsastrawi.morphology.defaultimpl.Context;
 import jsastrawi.morphology.defaultimpl.Removal;
 import jsastrawi.morphology.defaultimpl.RemovalImpl;
 
+/**
+ * Base class to disambiguate prefix rules
+ */
 public abstract class AbstractDisambiguatePrefixRule implements ContextVisitor {
 
     protected Collection<Disambiguator> disambiguators = new LinkedList<Disambiguator>();
@@ -56,10 +59,20 @@ public abstract class AbstractDisambiguatePrefixRule implements ContextVisitor {
         context.setCurrentWord(result);
     }
 
+    /**
+     * Add disambiguator
+     * 
+     * @param disambiguator disambiguator
+     */
     public void addDisambiguator(Disambiguator disambiguator) {
         disambiguators.add(disambiguator);
     }
 
+    /**
+     * Add many disambiguators at once
+     * 
+     * @param disambiguators a collection of disambiguators
+     */
     public void addDisambiguators(Collection<Disambiguator> disambiguators) {
         for (Disambiguator disambiguator : disambiguators) {
             this.disambiguators.add(disambiguator);

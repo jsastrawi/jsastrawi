@@ -26,16 +26,44 @@ package jsastrawi.morphology.defaultimpl;
 
 import jsastrawi.morphology.defaultimpl.visitor.ContextVisitor;
 
+/**
+ * Removal of part of the word
+ */
 public interface Removal {
 
+    /**
+     * Get visitor
+     *
+     * @return visitor
+     */
     public ContextVisitor getVisitor();
 
+    /**
+     * Get subject
+     *
+     * @return subject
+     */
     public String getSubject();
 
+    /**
+     * Get result
+     *
+     * @return result
+     */
     public String getResult();
 
+    /**
+     * Get removed part
+     *
+     * @return removed part
+     */
     public String getRemovedPart();
 
+    /**
+     * Get affix type
+     *
+     * @return affix type
+     */
     public String getAffixType();
 
 }

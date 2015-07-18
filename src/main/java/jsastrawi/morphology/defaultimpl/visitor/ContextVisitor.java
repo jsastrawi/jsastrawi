@@ -26,7 +26,15 @@ package jsastrawi.morphology.defaultimpl.visitor;
 
 import jsastrawi.morphology.defaultimpl.Context;
 
+/**
+ * Context Visitor.
+ */
 public interface ContextVisitor {
 
+    /**
+     * Visit context
+     * 
+     * @param context context to visit
+     */
     public void visit(Context context);
 }

@@ -28,6 +28,9 @@ import jsastrawi.morphology.defaultimpl.Context;
 import jsastrawi.morphology.defaultimpl.Removal;
 import jsastrawi.morphology.defaultimpl.RemovalImpl;
 
+/**
+ * Remove derivational suffix (i|kan|an), and foreign suffix (is|isme|isasi)
+ */
 class RemoveDerivationalSuffix implements ContextVisitor {
 
     @Override
@@ -43,6 +46,12 @@ class RemoveDerivationalSuffix implements ContextVisitor {
         }
     }
 
+    /**
+     * Remove derivational suffix from a word
+     *
+     * @param word word
+     * @return word after the derivational suffix has been removed
+     */
     public String remove(String word) {
         return word.replaceAll("(is|isme|isasi|i|kan|an)$", "");
     }

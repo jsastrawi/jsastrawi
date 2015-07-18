@@ -24,9 +24,22 @@
  */
 package jsastrawi.cli.output;
 
+/**
+ * Output Interface, the contract for printing messages.
+ */
 public interface Output {
 
+    /**
+     * Print a message with new line
+     * 
+     * @param x the message to print
+     */
     public void println(String x);
 
+    /**
+     * Print a message
+     * 
+     * @param x the message to print
+     */
     public void print(String x);
 }

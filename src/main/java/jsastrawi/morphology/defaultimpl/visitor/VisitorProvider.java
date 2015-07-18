@@ -29,12 +29,19 @@ import java.util.LinkedList;
 import java.util.List;
 import jsastrawi.morphology.defaultimpl.visitor.prefixrules.*;
 
+/**
+ * Context Visitor Provider. It provides visitors that will visit the context to
+ * apply each rule.
+ */
 public class VisitorProvider {
 
     private final List<ContextVisitor> visitors;
     private final List<ContextVisitor> suffixVisitors;
     private final List<ContextVisitor> prefixVisitors;
 
+    /**
+     * Constructor
+     */
     public VisitorProvider() {
         visitors = new LinkedList<>();
 
@@ -139,14 +146,29 @@ public class VisitorProvider {
         prefixVisitors.add(new PrefixDisambiguator(new PrefixRule42()));
     }
 
+    /**
+     * Get suffix visitors
+     *
+     * @return suffix visitors
+     */
     public List<ContextVisitor> getSuffixVisitors() {
         return suffixVisitors;
     }
 
+    /**
+     * Get visitors
+     *
+     * @return visitors
+     */
     public List<ContextVisitor> getVisitors() {
         return visitors;
     }
 
+    /**
+     * Get prefix visitors
+     *
+     * @return prefix visitors
+     */
     public List<ContextVisitor> getPrefixVisitors() {
         return prefixVisitors;
     }

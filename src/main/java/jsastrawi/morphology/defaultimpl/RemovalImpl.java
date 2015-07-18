@@ -26,6 +26,9 @@ package jsastrawi.morphology.defaultimpl;
 
 import jsastrawi.morphology.defaultimpl.visitor.ContextVisitor;
 
+/**
+ * Standard implementation of Removal
+ */
 public class RemovalImpl implements Removal {
 
     private final ContextVisitor visitor;
@@ -38,6 +41,15 @@ public class RemovalImpl implements Removal {
 
     private final String affixType;
 
+    /**
+     * Constructor
+     *
+     * @param visitor visitor
+     * @param subject subject
+     * @param result result
+     * @param removedPart removed part
+     * @param affixType affix type
+     */
     public RemovalImpl(ContextVisitor visitor, String subject, String result, String removedPart, String affixType) {
         this.visitor = visitor;
         this.subject = subject;

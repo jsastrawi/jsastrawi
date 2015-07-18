@@ -26,6 +26,13 @@ package jsastrawi.morphology.defaultimpl.confixstripping;
 
 import jsastrawi.specification.Specification;
 
+/**
+ * Precedence Adjustment Specification as in confix stripping algorithm.
+ * 
+ * <p>
+ * Asian J. 2007. Effective Techniques for Indonesian Text Retrieval. page 78.
+ * </p>
+ */
 public class PrecedenceAdjustmentSpec implements Specification<String> {
 
     private String[] regexRules = {

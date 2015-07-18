@@ -28,6 +28,9 @@ import jsastrawi.morphology.defaultimpl.Context;
 import jsastrawi.morphology.defaultimpl.Removal;
 import jsastrawi.morphology.defaultimpl.RemovalImpl;
 
+/**
+ * Remove Inflectional Possessive Pronoun (ku|mu|nya)
+ */
 class RemoveInflectionalPossessivePronoun implements ContextVisitor {
 
     @Override
@@ -43,6 +46,12 @@ class RemoveInflectionalPossessivePronoun implements ContextVisitor {
         }
     }
 
+    /**
+     * Remove inflectional possessive pronoun from a word
+     *
+     * @param word word
+     * @return word after the possessive pronoun has been removed
+     */
     public String remove(String word) {
         return word.replaceAll("-*(ku|mu|nya)$", "");
     }

@@ -30,11 +30,33 @@ import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.Context;
 import jsastrawi.morphology.defaultimpl.visitor.VisitorProvider;
 
+/**
+ * The default implementation of Lemmatizer for Bahasa Indonesia.
+ *
+ * It implements several stemming algorithms:
+ * <ul>
+ * <li>Nazief and Adriani</li>
+ * <li>Confix Stripping (CS)</li>
+ * <li>Enhanced Confix Stripping (ECS)</li>
+ * <li>Improved ECS</li>
+ * </ul>
+ *
+ * Sastrawi also makes several improvements to the algorithms. Resources and
+ * links to the original paper: <a
+ * href="https://github.com/sastrawi/sastrawi/wiki/Resources">
+ * https://github.com/sastrawi/sastrawi/wiki/Resources</a>.
+ */
 public class DefaultLemmatizer implements Lemmatizer {
 
     private final Set<String> dictionary;
     private final VisitorProvider visitorProvider;
 
+    /**
+     * Construct the default lemmatizer. The algorithms really depends on a
+     * dictionary of root words.
+     *
+     * @param dictionary dictionary of root words (base form)
+     */
     public DefaultLemmatizer(Set<String> dictionary) {
         this.dictionary = dictionary;
         this.visitorProvider = new VisitorProvider();
@@ -51,6 +73,9 @@ public class DefaultLemmatizer implements Lemmatizer {
         }
     }
 
+    /**
+     * @return the dictionary
+     */
     public Set<String> getDictionary() {
         return dictionary;
     }

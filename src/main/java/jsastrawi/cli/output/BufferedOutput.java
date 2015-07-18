@@ -24,6 +24,9 @@
  */
 package jsastrawi.cli.output;
 
+/**
+ * An implementation of Output with buffering.
+ */
 public class BufferedOutput implements Output {
 
     private final StringBuilder buffer = new StringBuilder();

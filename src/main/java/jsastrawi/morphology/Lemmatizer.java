@@ -24,7 +24,16 @@
  */
 package jsastrawi.morphology;
 
+/**
+ * The Lemmatizer is a tool to reduce a word to its base form (lemma).
+ */
 public interface Lemmatizer {
 
+    /**
+     * Reduce a word to its base form (lemma)
+     *
+     * @param word the word of which to find the lemma
+     * @return the lemma (base form)
+     */
     public String lemmatize(String word);
 }
