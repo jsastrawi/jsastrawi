@@ -28,6 +28,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 35 (CS additional rules) : terC1erC2 -&gt;
+ * ter-C1erC2 where C1 != {r}
+ */
 public class PrefixRule35 implements Disambiguator {
 
     @Override

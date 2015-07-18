@@ -28,6 +28,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 18a CS : menyV -&gt; me-nyV to stem menyala -&gt;
+ * nyala
+ */
 public class PrefixRule18a implements Disambiguator {
 
     @Override

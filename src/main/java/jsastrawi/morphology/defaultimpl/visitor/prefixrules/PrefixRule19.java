@@ -28,6 +28,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 19.
+ *
+ * Original Rule 19 : mempV -&gt; mem-pV where V != 'e'
+ *
+ * Modified Rule 19 by ECS : mempA -&gt; mem-pA where A != 'e' in order to stem
+ * memproteksi
+ */
 public class PrefixRule19 implements Disambiguator {
 
     @Override

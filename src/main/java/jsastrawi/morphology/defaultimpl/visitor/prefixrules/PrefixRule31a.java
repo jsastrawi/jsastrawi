@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 31a Confix Stripping : penyV -&gt; pe-nyV
+ */
 public class PrefixRule31a implements Disambiguator {
 
     @Override

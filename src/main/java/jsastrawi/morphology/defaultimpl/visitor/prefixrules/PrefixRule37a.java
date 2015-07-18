@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 37a (Confix Stripping infix rules) : CerV -&gt; CerV
+ */
 public class PrefixRule37a implements Disambiguator {
 
     @Override

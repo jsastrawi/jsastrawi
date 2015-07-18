@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 20 : pe{w|y}V -&gt; pe-{w|y}V
+ */
 public class PrefixRule20 implements Disambiguator {
 
     @Override

@@ -28,6 +28,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 18b.
+ *
+ * Original Rule 18 : menyV -&gt; meny-sV
+ *
+ * Modified by CS (shifted into 18b, see also 18a)
+ */
 public class PrefixRule18b implements Disambiguator {
 
     @Override

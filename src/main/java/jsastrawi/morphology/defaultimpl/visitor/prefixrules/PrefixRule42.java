@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 42 : kauA -&gt; kau-A
+ */
 public class PrefixRule42 implements Disambiguator {
 
     @Override

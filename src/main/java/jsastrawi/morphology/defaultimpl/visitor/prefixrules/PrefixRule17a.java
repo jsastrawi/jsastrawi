@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 17a : mengV -&gt; meng-V
+ */
 public class PrefixRule17a implements Disambiguator {
 
     @Override

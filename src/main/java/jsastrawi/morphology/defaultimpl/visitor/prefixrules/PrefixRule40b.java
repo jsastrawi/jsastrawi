@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 40b (CC infix rules) : CinV -&gt; CV
+ */
 public class PrefixRule40b implements Disambiguator {
 
     @Override

@@ -28,6 +28,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule no 14.
+ *
+ * Rule 14 modified by Andy Librian : men{c|d|j|s|t|z} -&gt; men-{c|d|j|s|t|z}
+ * in order to stem mentaati.
+ *
+ * Rule 14 modified by ECS: men{c|d|j|s|z} -&gt; men-{c|d|j|s|z} in order to
+ * stem mensyaratkan, mensyukuri.
+ *
+ * Original CS Rule no 14 was : men{c|d|j|z} -&gt; men-{c|d|j|z}.
+ */
 public class PrefixRule14 implements Disambiguator {
 
     @Override

@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 38a (Confix Stripping infix rules) : CelV -&gt; CelV
+ */
 public class PrefixRule38a implements Disambiguator {
 
     @Override

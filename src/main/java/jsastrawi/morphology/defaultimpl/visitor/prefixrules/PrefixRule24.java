@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 24 : perCAerV -&gt; per-CAerV where C != 'r'
+ */
 public class PrefixRule24 implements Disambiguator {
 
     @Override

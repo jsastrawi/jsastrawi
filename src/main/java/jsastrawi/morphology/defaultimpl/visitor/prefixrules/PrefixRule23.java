@@ -28,6 +28,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 23 : perCAP -&gt; per-CAP where C != 'r' AND P !=
+ * 'er'
+ */
 public class PrefixRule23 implements Disambiguator {
 
     @Override

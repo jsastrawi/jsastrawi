@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 8 : terCP -&gt; ter-CP where C != 'r' and P != 'er'
+ */
 public class PrefixRule8 implements Disambiguator {
 
     @Override

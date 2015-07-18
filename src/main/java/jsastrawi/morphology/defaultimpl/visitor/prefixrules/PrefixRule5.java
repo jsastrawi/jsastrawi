@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 5 : beC1erC2 -&gt; be-C1erC2 where C1 != 'r'
+ */
 public class PrefixRule5 implements Disambiguator {
 
     @Override

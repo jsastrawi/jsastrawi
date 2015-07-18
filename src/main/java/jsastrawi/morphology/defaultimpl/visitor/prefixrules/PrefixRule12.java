@@ -28,6 +28,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 12.
+ *
+ * Nazief and Adriani Rule 12 : mempe{r|l} -&gt; mem-pe{r|l}.
+ *
+ * Modified by Jelita Asian's CS Rule 12 : mempe -&gt; mem-pe to stem
+ * mempengaruhi.
+ */
 public class PrefixRule12 implements Disambiguator {
 
     @Override

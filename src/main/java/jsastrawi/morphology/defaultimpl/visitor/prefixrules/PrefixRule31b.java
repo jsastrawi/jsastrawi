@@ -28,6 +28,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 31b.
+ *
+ * Original Rule 31 : penyV -&gt; peny-sV.
+ *
+ * Modified by Confix Stripping, shifted to 31b.
+ */
 public class PrefixRule31b implements Disambiguator {
 
     @Override

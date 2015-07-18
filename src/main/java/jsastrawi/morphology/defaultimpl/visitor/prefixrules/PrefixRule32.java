@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 32 : pelV -&gt; pe-lV except pelajar -&gt; ajar
+ */
 public class PrefixRule32 implements Disambiguator {
 
     @Override

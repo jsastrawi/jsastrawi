@@ -28,6 +28,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 29.
+ *
+ * Original Rule 29 : peng{g|h|q} -&gt; peng-{g|h|q}.
+ *
+ * Modified Rule 29 by ECS : pengC -&gt; peng-C.
+ */
 public class PrefixRule29 implements Disambiguator {
 
     @Override

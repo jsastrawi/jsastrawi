@@ -28,6 +28,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 16.
+ *
+ * Original Nazief and Adriani's Rule 16 : meng{g|h|q} -&gt; meng-{g|h|q}.
+ *
+ * Modified Jelita Asian's CS Rule 16 : meng{g|h|q|k} -&gt; meng-{g|h|q|k} to
+ * stem mengkritik.
+ */
 public class PrefixRule16 implements Disambiguator {
 
     @Override

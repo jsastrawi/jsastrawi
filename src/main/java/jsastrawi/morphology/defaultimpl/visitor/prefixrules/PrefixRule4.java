@@ -26,6 +26,9 @@ package jsastrawi.morphology.defaultimpl.visitor.prefixrules;
 
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 4 : belajar -&gt; bel-ajar
+ */
 public class PrefixRule4 implements Disambiguator {
 
     @Override

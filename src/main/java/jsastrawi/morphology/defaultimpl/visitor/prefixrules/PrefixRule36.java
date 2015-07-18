@@ -28,6 +28,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jsastrawi.morphology.defaultimpl.visitor.Disambiguator;
 
+/**
+ * Disambiguate Prefix Rule 36 (CS additional rules) : peC1erC2 -&gt; pe-C1erC2
+ * where C1 != {r|w|y|l|m|n}
+ */
 public class PrefixRule36 implements Disambiguator {
 
     @Override
