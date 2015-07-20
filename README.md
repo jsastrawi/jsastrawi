@@ -2,7 +2,7 @@ JSastrawi
 =========
 [![Build Status](https://travis-ci.org/jsastrawi/jsastrawi.svg?branch=master)](https://travis-ci.org/jsastrawi/jsastrawi)
 
-JSastrawi is a collection of Natural Language Processing (NLP) for Bahasa Indonesia.
+JSastrawi is a collection of Natural Language Processing (NLP) tools for Bahasa Indonesia.
 It is originally a java port of [Sastrawi Stemmer](https://github.com/sastrawi/sastrawi).
 
 Components
