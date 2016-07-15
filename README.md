@@ -25,13 +25,57 @@ Tersedia demo pada [http://sastrawi.github.io](http://sastrawi.github.io)
 Cara Install
 ------------
 
-*Akan dilengkapi kemudian*
+### Maven
+
+```xml
+<dependency>
+    <groupId>com.andylibrian.jsastrawi</groupId>
+    <artifactId>jsastrawi</artifactId>
+    <version>0.1</version>
+</dependency>
+```
+
+### Gradle
+
+```
+compile 'com.andylibrian.jsastrawi:jsastrawi:0.1'
+```
+
+### Jar
+
+- https://github.com/jsastrawi/jsastrawi/releases
+
 
 Cara Menggunakan
 ----------------
 
-*Akan dilengkapi kemudian*
+### Lemmatizer
 
+```java
+// Mulai setup JSastrawi, cukup dijalankan 1 kali
+
+// JSastrawi lemmatizer membutuhkan kamus kata dasar
+// dalam bentuk Set<String>
+Set<String> dictionary = new HashSet<String>();
+
+// Memuat file kata dasar dari distribusi JSastrawi
+// Jika perlu, anda dapat mengganti file ini dengan kamus anda sendiri
+InputStream in = Lemmatizer.class.getResourceAsStream("/root-words.txt");
+BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+String line;
+while ((line = br.readLine()) != null) {
+    dictionary.add(line);
+}
+
+Lemmatizer lemmatizer = new DefaultLemmatizer(dictionary);
+// Selesai setup JSastrawi
+// lemmatizer bisa digunakan berkali-kali
+
+System.out.println(lemmatizer.lemmatize("memakan"));
+System.out.println(lemmatizer.lemmatize("meminum"));
+System.out.println(lemmatizer.lemmatize("bernyanyi"));
+```
 
 Lisensi
 --------
