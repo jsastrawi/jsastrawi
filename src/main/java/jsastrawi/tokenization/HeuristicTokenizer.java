@@ -65,7 +65,7 @@ public final class HeuristicTokenizer implements Tokenizer {
             Model m = new Model(text, i);
 
             int analysisSkip = 0;
-            int analysisShoulSplit = 0;
+            int analysisShouldSplit = 0;
             int analysisShouldNotSplit = 0;
 
             for (Analyzer analyzer : analyzers) {
@@ -74,13 +74,13 @@ public final class HeuristicTokenizer implements Tokenizer {
                 if (analysis == Analysis.SKIP) {
                     analysisSkip++;
                 } else if (analysis == Analysis.SHOULD_SPLIT) {
-                    analysisShoulSplit++;
+                    analysisShouldSplit++;
                 } else if (analysis == Analysis.SHOULD_NOT_SPLIT) {
                     analysisShouldNotSplit++;
                 }
             }
 
-            if (analysisShoulSplit > 0 && analysisShoulSplit >= analysisShouldNotSplit) {
+            if (analysisShouldSplit > 0 && analysisShouldSplit >= analysisShouldNotSplit) {
                 if (m.getCurrentChar() != ' ') {
                     if (tokenBuffer.length() > 0) {
                         tokens.add(tokenBuffer.toString());
